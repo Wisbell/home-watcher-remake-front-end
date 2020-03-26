@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
     }
@@ -27,21 +27,7 @@ export class LoginComponent implements OnInit {
     const username = form.value.username;
     const password = form.value.password;
 
-    let authObs: Observable<any>;
-
-    authObs = this.authService.login(username, password);
-
-    // TODO: Add toast on error?
-    authObs.subscribe(
-      resData => {
-        this.router.navigate(['/users']);
-      },
-      errorMessage => {
-        console.log(errorMessage);
-      }
-    );
-
-    form.reset();
+    await this.authService.login(username, password);
+    this.router.navigate(['/users']);
   }
-
 }

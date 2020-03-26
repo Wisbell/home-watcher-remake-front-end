@@ -12,8 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
-import { UsersComponent } from './pages/users/users.component';
 import { JwtModule } from "@auth0/angular-jwt";
+import { CommonModule } from '@angular/common';
+import { UserModule } from './user/user.module';
 
 const apiurl = 'localhost:3000';
 
@@ -24,24 +25,25 @@ const apiurl = 'localhost:3000';
     LoginComponent,
     SignUpComponent,
     AboutComponent,
-    HomeComponent,
-    UsersComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CommonModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
-          return localStorage.getItem("access_token");
+          return localStorage.getItem("accessToken");
         },
         whitelistedDomains: ["example.com", apiurl],
         blacklistedRoutes: ["example.com/examplebadroute/"]
       }
-    })
+    }),
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

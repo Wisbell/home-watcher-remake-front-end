@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { LoginResponse } from './login-response.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from '../pages/users/user.model';
+import { User } from '../user/user.model';
+import { AuthCredentialsDto } from './auth-credentials.dto';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,12 @@ import { User } from '../pages/users/user.model';
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Promise<void> {
     return this.http
       .post<LoginResponse>(
         `${this.apiUrl}/auth/login`,
@@ -22,26 +27,49 @@ export class AuthService {
           username: username,
           password: password
         }
-      )
-      .pipe(
-        catchError( error => this.handleError(error) ),
-        tap( (response: LoginResponse ) => {
-          this.handleAuthentication(response);
-        })
-      );
+      ).toPromise()
+      .then( (response: LoginResponse) => {
+        this.handleAuthentication(response);
+      })
+  }
+
+  // TODO: Add better error handling
+  register(authCredentialsDto: AuthCredentialsDto): Promise<boolean> {
+    return this.http
+      .post<User>(
+        `${this.apiUrl}/auth/register`,
+        authCredentialsDto
+      ).toPromise()
+      .then( (data) => {
+        console.log('data', data);
+        return true;
+      })
+      .catch( (error: HttpErrorResponse) => {
+        console.error('error', error);
+        // TODO: Show toast saying registering failed
+        return null;
+      });
+  }
+
+  logout(): void {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('AUTH_TOKEN');
+    localStorage.removeItem('userData');
+    this.router.navigate(['/']);
   }
 
   // TODO: auto log out after token expiration?
-  private handleAuthentication( loginResponse: LoginResponse ) {
-    localStorage.setItem('access_token', loginResponse.access_token);
+  private handleAuthentication( loginResponse: LoginResponse ): void {
+    localStorage.setItem('accessToken', loginResponse.accessToken);
     localStorage.setItem('userData',
       JSON.stringify(
-        this.getUserDataFromToken(loginResponse.access_token)
+        this.getUserDataFromToken(loginResponse.accessToken)
       ));
   }
 
-  // TODO: Create error messages for toasts, etc...
-  private handleError(errorResponse: HttpErrorResponse) {
+  // TODO: Create error messages for toasts, etc... Remove this if no longer used
+  private handleError(errorResponse: HttpErrorResponse): Observable<Error> {
+    console.log('called')
     let errorMessage = 'An unknown error occurred!';
     return throwError(errorMessage);
   }
@@ -50,8 +78,9 @@ export class AuthService {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     const user = new User();
-    user.userId = decodedToken.sub;
+    // user.id = decodedToken.id;
     user.username = decodedToken.username;
+    user.role = decodedToken.role;
     return user;
   }
 }

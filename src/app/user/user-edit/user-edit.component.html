@@ -1,0 +1,42 @@
+<!-- Update user form -->
+<form [formGroup]="userForm"
+      (ngSubmit)="onSubmit(userForm)"
+      class="border border-light p-5">
+
+  <p class="text-center h4 mb-4">Edit User</p>
+
+  <!-- Id: Disabled -->
+  <label for="id">Id</label>
+  <input
+    id="id"
+    name="id"
+    formControlName="id"
+    type="text"
+    [attr.disabled]="true"
+    class="form-control mb-4">
+
+  <!-- Username: Disabled -->
+  <label for="username">Username</label>
+  <input
+    id="username"
+    name="username"
+    formControlName="username"
+    type="text"
+    [attr.disabled]="true"
+    class="form-control mb-4">
+
+  <!-- Role -->
+  <select
+    id="role"
+    name="role"
+    formControlName="role"
+    class="browser-default custom-select">
+    <option value="basic">Basic</option>
+    <option value="admin">Admin</option>
+  </select>
+
+  <!-- Update user button -->
+  <button mdbBtn color="info" block="true" class="my-4" type="submit">Update User</button>
+
+</form>
+<!-- Update user form -->

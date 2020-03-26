@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 my-4">
+      <a [routerLink]="['create']" mdbBtn color="primary" mdbWavesEffect size="sm">Create User</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 my-4" *ngFor="let user of users">
+      <mdb-card>
+        <div class="view overlay waves-light" mdbWavesEffect>
+
+          <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap"></mdb-card-img>
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+        <mdb-card-body>
+          <mdb-card-title>
+            <h4>{{user.username}}</h4>
+          </mdb-card-title>
+
+          <mdb-card-text>
+            <p>Id: {{ user.id }}</p>
+            <p>Role: {{ user.role }}</p>
+          </mdb-card-text>
+
+          <a [routerLink]="['edit', user.id]" mdbBtn color="warning" mdbWavesEffect size="sm">Edit</a>
+          <a mdbBtn color="danger" mdbWavesEffect size="sm" (click)="deleteUser(user.id)">Delete</a>
+
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+</div>

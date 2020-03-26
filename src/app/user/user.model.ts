@@ -12,8 +12,9 @@ export class User {
     this.password = password;
   }
 
-  userId: number;
+  id: string;
   username: string;
   password: string;
+  salt: string;
   role: string; // admin | basic
 }
