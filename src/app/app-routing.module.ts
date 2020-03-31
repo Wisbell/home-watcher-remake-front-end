@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'security',
     loadChildren: () => import('./security/security-routing.module').then(m => m.SecurityRoutingModule)
+  },
+  {
+    path: 'incidents',
+    loadChildren: () => import('./incident/incident-routing.module').then(m => m.IncidentRoutingModule)
   }
 ];
 

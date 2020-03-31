@@ -8,6 +8,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { UserModule } from './user/user.module';
 import { SecurityModule } from './security/security.module';
+import { IncidentModule } from './incident/incident.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -45,7 +46,8 @@ const apiurl = 'localhost:3000';
     CommonModule,
     HttpClientModule,
     UserModule,
-    SecurityModule
+    SecurityModule,
+    IncidentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
