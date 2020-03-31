@@ -1,20 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { JwtModule } from "@auth0/angular-jwt";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { UserModule } from './user/user.module';
+import { SecurityModule } from './security/security.module';
+
+import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component'
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
-import { JwtModule } from "@auth0/angular-jwt";
-import { CommonModule } from '@angular/common';
-import { UserModule } from './user/user.module';
+
 
 const apiurl = 'localhost:3000';
 
@@ -28,12 +29,7 @@ const apiurl = 'localhost:3000';
     HomeComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CommonModule,
     MDBBootstrapModule.forRoot(),
-    HttpClientModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
@@ -43,7 +39,13 @@ const apiurl = 'localhost:3000';
         blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     }),
-    UserModule
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    HttpClientModule,
+    UserModule,
+    SecurityModule
   ],
   providers: [],
   bootstrap: [AppComponent]
