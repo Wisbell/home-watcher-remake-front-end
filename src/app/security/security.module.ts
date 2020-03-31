@@ -4,6 +4,7 @@ import { SecurityRoutingModule } from './security-routing.module';
 import { SecurityHomeComponent } from './security-home/security-home.component';
 import { SecurityRecentComponent } from './security-recent/security-recent.component';
 import { SecurityLiveComponent } from './security-live/security-live.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SecurityLiveComponent } from './security-live/security-live.component';
   ],
   imports: [
     CommonModule,
-    SecurityRoutingModule
+    SecurityRoutingModule,
+    MDBBootstrapModule.forRoot(),
   ]
 })
 export class SecurityModule { }
