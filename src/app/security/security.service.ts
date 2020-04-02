@@ -13,7 +13,7 @@ export class SecurityService {
 
   private imageApiUrl = 'http://localhost:3000/images';
 
-  async getAllPictures(): Promise<Image[]> {
+  async getAllImages(): Promise<Image[]> {
     const images: Image[] = await this.httpClient
       .get(`${this.imageApiUrl}`)
       .toPromise()
@@ -22,14 +22,14 @@ export class SecurityService {
     return images;
   }
 
-  // async getUser(id: string): Promise<User> {
-  //   const user: User = await this.httpClient
-  //     .get(`${this.userApiUrl}/${id}`)
-  //     .toPromise()
-  //     .then( (user) => user as User);
+  async getImage(id: string): Promise<Image> {
+    const image: Image = await this.httpClient
+      .get(`${this.imageApiUrl}/${id}`)
+      .toPromise()
+      .then( (image) => image as Image);
 
-  //   return user;
-  // }
+    return image;
+  }
 
   // // Create User
   // async createUser(newUser: User): Promise<User> {
