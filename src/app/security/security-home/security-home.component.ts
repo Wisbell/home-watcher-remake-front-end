@@ -16,11 +16,11 @@ export class SecurityHomeComponent implements OnInit {
   images: Image[];
 
   ngOnInit(): void {
-    this.getAllPictures();
+    this.getAllImages();
   }
 
-  getAllPictures() {
-    this.securityService.getAllPictures()
+  getAllImages() {
+    this.securityService.getAllImages()
     .then( (data) => {
       console.log('data', data);
       const theImages = data as Image[];
@@ -32,7 +32,7 @@ export class SecurityHomeComponent implements OnInit {
     var result = confirm("Are you sure you want to delete this image?");
     if (result) {
       await this.securityService.deleteImage(id);
-      this.getAllPictures();
+      this.getAllImages();
     }
   }
 }
