@@ -41,7 +41,7 @@ export class IncidentCreateComponent implements OnInit {
 
     const { text } = form.getRawValue();
 
-    const newIncident: IncidentDto = new IncidentDto(text, this.imageId);
+    const newIncident: IncidentDto = new IncidentDto(undefined, text, undefined, this.imageId);
 
     const savedIncident = await this.incidentService.create(newIncident);
 
