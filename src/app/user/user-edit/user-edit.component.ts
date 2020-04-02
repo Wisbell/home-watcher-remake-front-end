@@ -73,5 +73,4 @@ export class UserEditComponent implements OnInit {
       role: userDto.role
     })
   }
-
 }
