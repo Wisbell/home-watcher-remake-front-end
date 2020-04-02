@@ -1,1 +1,31 @@
-<p>incident-create works!</p>
+<!-- Create incident form -->
+<form [formGroup]="incidentForm"
+      (ngSubmit)="onSubmit(incidentForm)"
+      class="border border-light p-5">
+
+  <p class="text-center h4 mb-4">Create Incident</p>
+
+  <!-- Image row -->
+  <div class="row">
+    <div class="col">
+      <img
+        *ngIf="incidentImage"
+        src="data:image/jpeg;base64,{{incidentImage.image}}"
+        style="height: 300px;"
+        class="mx-auto d-block">
+    </div>
+  </div>
+
+  <!-- Incident Text -->
+  <label for="text">Describe the Incident</label>
+  <textarea
+    id="text"
+    name="text"
+    formControlName="text"
+    class="form-control mb-4"></textarea>
+
+  <!-- Save incident button -->
+  <button mdbBtn color="info" block="true" class="my-4" type="submit">Save Incident</button>
+
+</form>
+<!-- Create incident form -->
