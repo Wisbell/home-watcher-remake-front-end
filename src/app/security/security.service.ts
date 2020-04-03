@@ -31,29 +31,6 @@ export class SecurityService {
     return image;
   }
 
-  // // Create User
-  // async createUser(newUser: User): Promise<User> {
-  //   throw new Error('Not Implemented');
-
-  //   const savedUser: User = await this.httpClient
-  //   .post(`${this.userApiUrl}}`, newUser)
-  //   .toPromise()
-  //   .then( (user) => user as User);
-
-  // return savedUser;
-  // }
-
-  // // Update User
-  // async updateUser(id: string, updatedUser: User): Promise<User> {
-  //   const savedUser: User = await this.httpClient
-  //     .put(`${this.userApiUrl}/${id}`, updatedUser)
-  //     .toPromise()
-  //     .then( (user) => user as User);
-
-  //   return savedUser;
-  // }
-
-  // Delete User
   async deleteImage(id: string): Promise<void> {
     await this.httpClient
       .delete(`${this.imageApiUrl}/${id}`)

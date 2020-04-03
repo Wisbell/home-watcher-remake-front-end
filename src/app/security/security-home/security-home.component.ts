@@ -22,7 +22,6 @@ export class SecurityHomeComponent implements OnInit {
   getAllImages() {
     this.securityService.getAllImages()
     .then( (data) => {
-      console.log('data', data);
       const theImages = data as Image[];
       this.images = theImages;
     });
