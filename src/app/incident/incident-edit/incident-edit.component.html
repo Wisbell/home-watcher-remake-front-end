@@ -1,4 +1,4 @@
-<!-- Update user form -->
+<!-- Update incident form -->
 <form [formGroup]="incidentForm"
       (ngSubmit)="onSubmit(incidentForm)"
       class="border border-light p-5">
@@ -43,18 +43,9 @@
     formControlName="text"
     class="form-control mb-4"></textarea>
 
-  <!-- Role -->
-  <!-- <select
-    id="role"
-    name="role"
-    formControlName="role"
-    class="browser-default custom-select">
-    <option value="basic">Basic</option>
-    <option value="admin">Admin</option>
-  </select> -->
 
-  <!-- Update user button -->
+  <!-- Update Incident button -->
   <button mdbBtn color="info" block="true" class="my-4" type="submit">Update Incident</button>
 
 </form>
-<!-- Update user form -->
+<!-- Update incident form -->

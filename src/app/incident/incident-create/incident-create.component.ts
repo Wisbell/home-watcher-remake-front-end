@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IncidentService } from '../incident.service';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Incident } from '../incident.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SecurityService } from '../../security/security.service';
 import { Image } from '../../security/image.model';
+import { IncidentService } from '../incident.service';
 import { IncidentDto } from '../incident.dto';
 
 @Component({
@@ -43,9 +41,7 @@ export class IncidentCreateComponent implements OnInit {
 
     const newIncident: IncidentDto = new IncidentDto(undefined, text, undefined, this.imageId);
 
-    const savedIncident = await this.incidentService.create(newIncident);
-
-    console.log('savedIncident', savedIncident);
+    await this.incidentService.create(newIncident);
 
     this.router.navigate(['/incidents']);
   }

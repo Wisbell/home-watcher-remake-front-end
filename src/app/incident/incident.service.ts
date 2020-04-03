@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IncidentDto } from './incident.dto';
-import { Incident } from './incident.model';
 
 @Injectable({
   providedIn: 'root'

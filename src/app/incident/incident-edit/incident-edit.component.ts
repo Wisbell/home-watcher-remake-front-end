@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { IncidentService } from '../incident.service';
@@ -13,7 +12,6 @@ import { IncidentDto } from '../incident.dto';
 export class IncidentEditComponent implements OnInit {
 
   constructor(
-    private httpClient: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,

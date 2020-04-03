@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { IncidentService } from '../incident.service';
-// import { Incident } from '../incident.model';
 import { IncidentDto } from '../incident.dto';
 
 @Component({
@@ -26,7 +24,6 @@ export class IncidentListComponent implements OnInit {
   getAllIncidents() {
     this.incidentService.getAll()
     .then( (data) => {
-      console.log('data', data);
       const theIncidents = data as IncidentDto[];
       this.incidents = theIncidents;
     });
