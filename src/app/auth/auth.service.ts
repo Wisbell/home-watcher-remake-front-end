@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../user/user.model';
 import { AuthCredentialsDto } from './auth-credentials.dto';
 import { Router } from '@angular/router';
+import { LoggedInResponse } from './logged-in-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +56,7 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('AUTH_TOKEN');
     localStorage.removeItem('userData');
-    this.router.navigate(['/']);
+    window.location.href = window.location.href;
   }
 
   // TODO: auto log out after token expiration?
@@ -82,5 +83,22 @@ export class AuthService {
     user.username = decodedToken.username;
     user.role = decodedToken.role;
     return user;
+  }
+
+  async checkIfLoggedIn(): Promise<boolean> {
+    return await this.http
+      .get<LoggedInResponse>(
+        `${this.apiUrl}/auth/loggedIn`
+      ).toPromise()
+      .then( (response) => {
+        console.log('loggedin?', response);
+        if(response.loggedIn)
+          return true;
+        else
+          return false;
+      })
+      .catch( error => {
+        return false;
+      });
   }
 }
