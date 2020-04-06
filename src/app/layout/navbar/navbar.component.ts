@@ -9,12 +9,14 @@ import { AuthService } from '../../auth/auth.service';
 export class NavbarComponent implements OnInit {
   brandText = 'Home Watcher';
 
+  public loggedIn: boolean;
+
   constructor(
     private authService: AuthService
   ) { }
 
-  ngOnInit(): void {
-
+  async ngOnInit(): Promise<void> {
+    this.loggedIn = await this.authService.checkIfLoggedIn();
   }
 
   logout() {

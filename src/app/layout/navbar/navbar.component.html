@@ -36,14 +36,8 @@
           <div class="btn-group" mdbDropdown>
             <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
             <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-              <a class="dropdown-item" href="/login">Log in</a>
-              <a class="dropdown-item" href="/register">Register</a>
-              <a class="dropdown-item" (click)="logout()">Logout</a>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="divider dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
+              <a *ngIf="!loggedIn" class="dropdown-item" href="/login">Log in</a>
+              <a *ngIf="loggedIn" class="dropdown-item" (click)="logout()">Logout</a>
             </div>
           </div>
         </a>
