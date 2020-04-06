@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      // TODO: Change to use auth service login function
       return this.http
       .get<LoggedInResponse>(
         `${this.apiUrl}/auth/loggedIn`
