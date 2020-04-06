@@ -16,6 +16,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component'
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RaspPiModule } from './rasp-pi/rasp-pi.module';
 
 
 const apiurl = 'localhost:3000';
@@ -47,7 +48,8 @@ const apiurl = 'localhost:3000';
     HttpClientModule,
     UserModule,
     SecurityModule,
-    IncidentModule
+    IncidentModule,
+    RaspPiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
