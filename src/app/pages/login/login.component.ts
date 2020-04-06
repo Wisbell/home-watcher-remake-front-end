@@ -28,6 +28,6 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
 
     await this.authService.login(username, password);
-    this.router.navigate(['/users']);
+    this.router.navigate(['/']);
   }
 }
