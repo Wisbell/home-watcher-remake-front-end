@@ -1,0 +1,14 @@
+<!-- Rasp pi api status -->
+<div>
+  <h5 class="d-inline">Raspberry Pi API: </h5>
+  <span *ngIf="raspPiApiStatus === 'online'" class="green-text">online</span>
+  <span *ngIf="raspPiApiStatus === 'offline'" class="red-text">offline</span>
+  <p>The API server allows you to turn the camera on and off</p>
+</div>
+
+<!-- Raspi pi camera status -->
+<div>
+  <h5 class="d-inline">Raspberry Pi Camera: </h5>
+  <span *ngIf="raspPiCameraStatus === 'online'" class="green-text">online</span>
+  <span *ngIf="raspPiCameraStatus === 'offline'" class="red-text">offline</span>
+</div>
