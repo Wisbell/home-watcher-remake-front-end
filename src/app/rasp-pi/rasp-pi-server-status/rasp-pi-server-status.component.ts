@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RaspPiService } from '../rasp-pi.service';
 
 @Component({
   selector: 'app-rasp-pi-server-status',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RaspPiServerStatusComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private raspPiService: RaspPiService
+  ) { }
 
-  public raspPiApiStatus = 'offline';
-  public raspPiCameraStatus = 'offline';
+  public raspPiApiStatus = null;
+  public raspPiCameraStatus = null;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.raspPiApiStatus = await this.raspPiService.getApiStatus();
+    this.raspPiCameraStatus = await this.raspPiService.getCameraStatus();
   }
 }

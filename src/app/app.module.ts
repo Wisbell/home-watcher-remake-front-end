@@ -17,6 +17,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component'
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RaspPiModule } from './rasp-pi/rasp-pi.module';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 
 const apiurl = 'localhost:3000';
@@ -28,7 +29,8 @@ const apiurl = 'localhost:3000';
     LoginComponent,
     SignUpComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    SettingsComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
