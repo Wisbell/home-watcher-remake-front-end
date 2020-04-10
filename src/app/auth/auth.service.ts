@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
-import { LoginResponse } from './login-response.interface';
+import { throwError, Observable, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../user/user.model';
 import { AuthCredentialsDto } from './auth-credentials.dto';
-import { Router } from '@angular/router';
+import { LoginResponse } from './login-response.interface';
 import { LoggedInResponse } from './logged-in-response.interface';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
+  // NOTE: This subject/observable is created so navbar is updated upon initial login
+  private loggedInSubject = new Subject<boolean>();
+  loggedInObservable$ = this.loggedInSubject.asObservable();
 
   constructor(
     private http: HttpClient,
+    private toastr: ToastrService,
     private router: Router
   ) { }
+
+  emitLoggedIn(personLoggedIn: boolean) {
+    this.loggedInSubject.next(personLoggedIn);
+  }
 
   login(username: string, password: string): Promise<void> {
     return this.http
@@ -31,7 +39,15 @@ export class AuthService {
       ).toPromise()
       .then( (response: LoginResponse) => {
         this.handleAuthentication(response);
+        this.emitLoggedIn(true);
+        this.router.navigate(['/']);
       })
+      .catch( (error) => {
+        if (error.status === 401)
+          this.toastr.warning('Invalid username and/or password', 'Error');
+        else
+          this.toastr.warning('Trouble logging in', 'Error');
+      });
   }
 
   // TODO: Add better error handling

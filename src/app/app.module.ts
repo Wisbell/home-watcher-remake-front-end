@@ -9,6 +9,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { UserModule } from './user/user.module';
 import { SecurityModule } from './security/security.module';
 import { IncidentModule } from './incident/incident.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -18,6 +19,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RaspPiModule } from './rasp-pi/rasp-pi.module';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const apiurl = 'localhost:3000';
@@ -43,6 +45,8 @@ const apiurl = 'localhost:3000';
         blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     }),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -7,20 +8,25 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  brandText = 'Home Watcher';
-
+  public brandText = 'Home Watcher';
   public loggedIn: boolean;
+  loggedInSubscription: Subscription
 
   constructor(
     private authService: AuthService
-  ) { }
+  ) {
+    // NOTE: This is to the navbar updates login variable when first logging in
+    this.loggedInSubscription = authService.loggedInObservable$.subscribe(
+      loggedIn => {
+        this.loggedIn = loggedIn;
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     this.loggedIn = await this.authService.checkIfLoggedIn();
   }
 
   logout() {
-    console.log('logout!');
     this.authService.logout();
   }
 }

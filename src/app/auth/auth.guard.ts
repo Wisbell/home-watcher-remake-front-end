@@ -19,21 +19,19 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      // TODO: Change to use auth service login function
       return this.httpClient
       .get<LoggedInResponse>(
         `${this.apiUrl}/auth/loggedIn`
       )
       .pipe(
         catchError( (error) => {
-          // TODO: Add toast of error - invalid username/pass?
           return of(false);
         }),
         map((response: LoggedInResponse) => {
           if(response.loggedIn)
             return true;
           else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
             return false;
           }
         })
