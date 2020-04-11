@@ -1,0 +1,51 @@
+<!-- Update incident form -->
+<form [formGroup]="incidentForm"
+      (ngSubmit)="onSubmit(incidentForm)"
+      class="border border-light p-5">
+
+  <p class="text-center h4 mb-4">Edit Incident</p>
+
+  <!-- Id: Disabled -->
+  <label for="id">Id</label>
+  <input
+    id="id"
+    name="id"
+    formControlName="id"
+    type="text"
+    [attr.disabled]="true"
+    class="form-control mb-4">
+
+  <!-- Date Created: Disabled -->
+  <label for="dateCreated">Date Created</label>
+  <input
+    id="dateCreated"
+    name="dateCreated"
+    formControlName="dateCreated"
+    type="text"
+    [attr.disabled]="true"
+    class="form-control mb-4">
+
+  <!-- Image Id: Disabled -->
+  <label for="imageId">Image Id</label>
+  <input
+    id="imageId"
+    name="imageId"
+    formControlName="imageId"
+    type="text"
+    [attr.disabled]="true"
+    class="form-control mb-4">
+
+  <!-- Text -->
+  <label for="text">Text</label>
+  <textarea
+    id="text"
+    name="text"
+    formControlName="text"
+    class="form-control mb-4"></textarea>
+
+
+  <!-- Update Incident button -->
+  <button mdbBtn color="info" block="true" class="my-4" type="submit">Update Incident</button>
+
+</form>
+<!-- Update incident form -->

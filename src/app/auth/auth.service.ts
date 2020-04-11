@@ -1,23 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
-import { LoginResponse } from './login-response.interface';
+import { throwError, Observable, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../user/user.model';
 import { AuthCredentialsDto } from './auth-credentials.dto';
-import { Router } from '@angular/router';
+import { LoginResponse } from './login-response.interface';
+import { LoggedInResponse } from './logged-in-response.interface';
+import { ToastrService } from 'ngx-toastr';
+import { GlobalConstants } from '../app.global-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = GlobalConstants.apiURL;
+  // NOTE: This subject/observable is created so navbar is updated upon initial login
+  private loggedInSubject = new Subject<boolean>();
+  loggedInObservable$ = this.loggedInSubject.asObservable();
 
   constructor(
     private http: HttpClient,
+    private toastr: ToastrService,
     private router: Router
   ) { }
+
+  emitLoggedIn(personLoggedIn: boolean) {
+    this.loggedInSubject.next(personLoggedIn);
+  }
 
   login(username: string, password: string): Promise<void> {
     return this.http
@@ -30,10 +40,17 @@ export class AuthService {
       ).toPromise()
       .then( (response: LoginResponse) => {
         this.handleAuthentication(response);
+        this.emitLoggedIn(true);
+        this.router.navigate(['/']);
       })
+      .catch( (error) => {
+        if (error.status === 401)
+          this.toastr.warning('Invalid username and/or password', 'Error');
+        else
+          this.toastr.warning('Trouble logging in', 'Error');
+      });
   }
 
-  // TODO: Add better error handling
   register(authCredentialsDto: AuthCredentialsDto): Promise<boolean> {
     return this.http
       .post<User>(
@@ -45,8 +62,11 @@ export class AuthService {
         return true;
       })
       .catch( (error: HttpErrorResponse) => {
-        console.error('error', error);
-        // TODO: Show toast saying registering failed
+        if (error.status === 400)
+          this.toastr.warning('Password must be 8 characters long or username is taken', 'Error');
+        else
+          this.toastr.warning('Trouble Registering', 'Error');
+
         return null;
       });
   }
@@ -55,7 +75,7 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('AUTH_TOKEN');
     localStorage.removeItem('userData');
-    this.router.navigate(['/']);
+    window.location.href = window.location.href;
   }
 
   // TODO: auto log out after token expiration?
@@ -82,5 +102,21 @@ export class AuthService {
     user.username = decodedToken.username;
     user.role = decodedToken.role;
     return user;
+  }
+
+  async checkIfLoggedIn(): Promise<boolean> {
+    return await this.http
+      .get<LoggedInResponse>(
+        `${this.apiUrl}/auth/loggedIn`
+      ).toPromise()
+      .then( (response) => {
+        if(response.loggedIn)
+          return true;
+        else
+          return false;
+      })
+      .catch( error => {
+        return false;
+      });
   }
 }

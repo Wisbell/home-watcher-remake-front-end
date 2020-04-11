@@ -1,17 +1,22 @@
-<p>home works!</p>
-
-<h6>TODO</h6>
-<ul class="list-group">
-  <li class="list-group-item">Add sentence or two at top about project.  More information in the about page</li>
-</ul>
-
-<h6>TODO - logged in?</h6>
-<ul class="list-group">
-  <li class="list-group-item">Add text/green dot that shows if camera is online</li>
-  <li class="list-group-item">Show most recent pictures - 3 or 4</li>
-</ul>
-
-<h6>TODO - logged out?</h6>
-<ul class="list-group">
-  <li class="list-group-item">Show Login/Register links</li>
-</ul>
+<div class="container">
+  <!-- Home Watcher info -->
+  <div class="row">
+    <div class="col text-center mt-3">
+      <h3>Welcome to Home Watcher</h3>
+      <p>Home Watcher is an app that helps users keep watch over an area at home.</p>
+      <p>It makes use of a raspberry pi computer using a motion sensor which triggers a camera.</p>
+      <p>If the API/camera are offline you can still see past pictures and incidents in the menu.</p>
+    </div>
+  </div>
+  <!-- Login Button/Rasp Pi status component -->
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div *ngIf="loggedIn">
+        <app-rasp-pi-server-status></app-rasp-pi-server-status>
+      </div>
+      <div *ngIf="!loggedIn" class="text-center">
+        <a [routerLink]="['/login']" class="btn btn-primary btn-lg" role="button">Log in</a>
+      </div>
+    </div>
+  </div>
+</div>
