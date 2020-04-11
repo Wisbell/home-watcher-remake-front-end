@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -7,7 +8,6 @@ import { AuthCredentialsDto } from './auth-credentials.dto';
 import { LoginResponse } from './login-response.interface';
 import { LoggedInResponse } from './logged-in-response.interface';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +50,6 @@ export class AuthService {
       });
   }
 
-  // TODO: Add better error handling
   register(authCredentialsDto: AuthCredentialsDto): Promise<boolean> {
     return this.http
       .post<User>(
@@ -62,8 +61,11 @@ export class AuthService {
         return true;
       })
       .catch( (error: HttpErrorResponse) => {
-        console.error('error', error);
-        // TODO: Show toast saying registering failed
+        if (error.status === 400)
+          this.toastr.warning('Password must be 8 characters long or username is taken', 'Error');
+        else
+          this.toastr.warning('Trouble Registering', 'Error');
+
         return null;
       });
   }
@@ -107,7 +109,6 @@ export class AuthService {
         `${this.apiUrl}/auth/loggedIn`
       ).toPromise()
       .then( (response) => {
-        console.log('loggedin?', response);
         if(response.loggedIn)
           return true;
         else
