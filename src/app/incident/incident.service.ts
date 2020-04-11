@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IncidentDto } from './incident.dto';
+import { GlobalConstants } from '../app.global-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class IncidentService {
     private httpClient: HttpClient
   ) { }
 
-  private incidentApiUrl = 'http://localhost:3000/incidents';
+  private incidentApiUrl = `${GlobalConstants.apiURL}/incidents`;
 
   async getAll(): Promise<IncidentDto[]> {
     const incidents: IncidentDto[] = await this.httpClient

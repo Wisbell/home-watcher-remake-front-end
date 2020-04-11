@@ -8,12 +8,13 @@ import { AuthCredentialsDto } from './auth-credentials.dto';
 import { LoginResponse } from './login-response.interface';
 import { LoggedInResponse } from './logged-in-response.interface';
 import { ToastrService } from 'ngx-toastr';
+import { GlobalConstants } from '../app.global-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = GlobalConstants.apiURL;
   // NOTE: This subject/observable is created so navbar is updated upon initial login
   private loggedInSubject = new Subject<boolean>();
   loggedInObservable$ = this.loggedInSubject.asObservable();

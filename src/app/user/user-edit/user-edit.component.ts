@@ -1,3 +1,5 @@
+// TODO: User service to get users
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -5,6 +7,7 @@ import { User } from '../user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDto } from '../user.dto';
 import { UserService } from '../user.service';
+import { GlobalConstants } from '../../app.global-constants';
 
 @Component({
   selector: 'app-user-edit',
@@ -22,7 +25,7 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   private user: User;
-  private getUserEndpoint: string = 'http://localhost:3000/users';
+  private getUserEndpoint = `${GlobalConstants.apiURL}/users`;
 
   public userForm: FormGroup = this.formBuilder.group({
     id: new FormControl({ value: '', disabled: true }),

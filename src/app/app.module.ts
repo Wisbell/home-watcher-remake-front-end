@@ -21,7 +21,7 @@ import { RaspPiModule } from './rasp-pi/rasp-pi.module';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ToastrModule } from 'ngx-toastr';
 
-
+// TODO: Figure out why this won't accept the global constants variable in app.global-constants file
 const apiurl = 'localhost:3000';
 
 @NgModule({
