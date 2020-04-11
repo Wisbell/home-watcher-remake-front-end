@@ -1,8 +1,11 @@
+// TODO: Change to use service instead of direct call to api
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { IncidentService } from '../incident.service';
 import { IncidentDto } from '../incident.dto';
+import { GlobalConstants } from '../../app.global-constants';
 
 @Component({
   selector: 'app-incident-edit',
@@ -20,7 +23,7 @@ export class IncidentEditComponent implements OnInit {
 
   private incident: IncidentDto;
   private incidentId: string;
-  private getIncidentEndpoint: string = 'http://localhost:3000/incidents';
+  private getIncidentEndpoint: string = `${GlobalConstants.apiURL}/incidents`;
 
   public incidentForm: FormGroup = this.formBuilder.group({
     id: new FormControl({ value: '', disabled: true }),

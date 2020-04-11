@@ -1,5 +1,6 @@
 // TODO: Add error handling if failed getting users?
 // TODO: Add images to user model
+// TODO: Remove ability for logged in user to delete their account or if they can log them out afterwards
 
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';

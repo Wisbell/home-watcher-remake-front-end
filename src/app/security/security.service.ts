@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Image } from './image.model';
+import { GlobalConstants } from '../app.global-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SecurityService {
     private httpClient: HttpClient
   ) { }
 
-  private imageApiUrl = 'http://localhost:3000/images';
+  private imageApiUrl = `${GlobalConstants.apiURL}/images`;
 
   async getAllImages(): Promise<Image[]> {
     const images: Image[] = await this.httpClient

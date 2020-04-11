@@ -3,6 +3,8 @@ import { AuthService } from '../../auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    // private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +31,5 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
 
     await this.authService.login(username, password);
-    this.router.navigate(['/users']);
   }
 }
