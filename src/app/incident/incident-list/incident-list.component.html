@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 my-4" *ngFor="let incident of incidents ">
+      <mdb-card>
+        <div class="view overlay waves-light" mdbWavesEffect>
+
+          <mdb-card-img src="data:image/jpeg;base64,{{incident.image.image}}" alt="Card image cap"></mdb-card-img>
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+        <mdb-card-body>
+          <mdb-card-text>
+            <p>Id: {{ incident.id }}</p>
+            <p>DateCreated: {{ incident.dateCreated }}</p>
+            <p>Text: {{ incident.text }}</p>
+          </mdb-card-text>
+
+          <a [routerLink]="['../incidents/edit', incident.id]" mdbBtn color="warning" mdbWavesEffect size="sm">Edit Incident</a>
+          <a mdbBtn color="danger" mdbWavesEffect size="sm" (click)="deleteIncident(incident.id)">Delete</a>
+
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+</div>

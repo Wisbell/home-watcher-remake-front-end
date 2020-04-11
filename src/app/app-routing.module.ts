@@ -13,19 +13,15 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./user/user-routing.module').then(m => m.UserRoutingModule)
+  },
+  {
+    path: 'security',
+    loadChildren: () => import('./security/security-routing.module').then(m => m.SecurityRoutingModule)
+  },
+  {
+    path: 'incidents',
+    loadChildren: () => import('./incident/incident-routing.module').then(m => m.IncidentRoutingModule)
   }
-  // {
-  //   path: 'users', component: UsersComponent,
-  //   canActivate: [AuthGuard],
-  // },
-  // {
-  //   path: 'users/create', component: UserCreateComponent,
-  //   canActivate: [AuthGuard],
-  // },
-  // {
-  //   path: 'users/edit/:id', component: UserEditComponent,
-  //   canActivate: [AuthGuard],
-  // },
 ];
 
 @NgModule({

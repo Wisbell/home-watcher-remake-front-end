@@ -1,21 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { JwtModule } from "@auth0/angular-jwt";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { UserModule } from './user/user.module';
+import { SecurityModule } from './security/security.module';
+import { IncidentModule } from './incident/incident.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component'
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
-import { JwtModule } from "@auth0/angular-jwt";
-import { CommonModule } from '@angular/common';
-import { UserModule } from './user/user.module';
+import { RaspPiModule } from './rasp-pi/rasp-pi.module';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { ToastrModule } from 'ngx-toastr';
 
+// TODO: Figure out why this won't accept the global constants variable in app.global-constants file
 const apiurl = 'localhost:3000';
 
 @NgModule({
@@ -25,15 +31,11 @@ const apiurl = 'localhost:3000';
     LoginComponent,
     SignUpComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    SettingsComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CommonModule,
     MDBBootstrapModule.forRoot(),
-    HttpClientModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
@@ -43,7 +45,17 @@ const apiurl = 'localhost:3000';
         blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     }),
-    UserModule
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    HttpClientModule,
+    UserModule,
+    SecurityModule,
+    IncidentModule,
+    RaspPiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
