@@ -3,18 +3,18 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../user/user.model';
 import { AuthCredentialsDto } from './auth-credentials.dto';
 import { LoginResponse } from './login-response.interface';
 import { LoggedInResponse } from './logged-in-response.interface';
-import { ToastrService } from 'ngx-toastr';
-import { GlobalConstants } from '../app.global-constants';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = GlobalConstants.apiURL;
   // NOTE: This subject/observable is created so navbar is updated upon initial login
   private loggedInSubject = new Subject<boolean>();
   loggedInObservable$ = this.loggedInSubject.asObservable();
@@ -32,7 +32,7 @@ export class AuthService {
   login(username: string, password: string): Promise<void> {
     return this.http
       .post<LoginResponse>(
-        `${this.apiUrl}/auth/login`,
+        `${environment.apiUrl}/auth/login`,
         {
           username: username,
           password: password
@@ -54,7 +54,7 @@ export class AuthService {
   register(authCredentialsDto: AuthCredentialsDto): Promise<boolean> {
     return this.http
       .post<User>(
-        `${this.apiUrl}/auth/register`,
+        `${environment.apiUrl}/auth/register`,
         authCredentialsDto
       ).toPromise()
       .then( (data) => {
@@ -107,7 +107,7 @@ export class AuthService {
   async checkIfLoggedIn(): Promise<boolean> {
     return await this.http
       .get<LoggedInResponse>(
-        `${this.apiUrl}/auth/loggedIn`
+        `${environment.apiUrl}/auth/loggedIn`
       ).toPromise()
       .then( (response) => {
         if(response.loggedIn)

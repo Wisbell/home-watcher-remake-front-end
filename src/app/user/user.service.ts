@@ -3,7 +3,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
-import { GlobalConstants } from '../app.global-constants';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
     private httpClient: HttpClient
   ) { }
 
-  private userApiUrl = `${GlobalConstants.apiURL}/users`;
+  private userApiUrl = `${environment.apiUrl}/users`;
 
   async getAllUsers(): Promise<User[]> {
     const users: User[] = await this.httpClient
