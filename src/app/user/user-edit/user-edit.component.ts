@@ -7,7 +7,8 @@ import { User } from '../user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDto } from '../user.dto';
 import { UserService } from '../user.service';
-import { GlobalConstants } from '../../app.global-constants';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-user-edit',
@@ -25,7 +26,7 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   private user: User;
-  private getUserEndpoint = `${GlobalConstants.apiURL}/users`;
+  private getUserEndpoint = `${environment.apiUrl}/users`;
 
   public userForm: FormGroup = this.formBuilder.group({
     id: new FormControl({ value: '', disabled: true }),

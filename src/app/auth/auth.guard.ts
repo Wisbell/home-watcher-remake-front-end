@@ -4,13 +4,14 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { LoggedInResponse } from './logged-in-response.interface';
-import { GlobalConstants } from '../app.global-constants';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  private apiUrl = GlobalConstants.apiURL;
+  private apiUrl = environment.apiUrl;
 
   constructor(
     private httpClient: HttpClient,

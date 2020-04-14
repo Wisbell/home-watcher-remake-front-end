@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { IncidentService } from '../incident.service';
 import { IncidentDto } from '../incident.dto';
-import { GlobalConstants } from '../../app.global-constants';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-incident-edit',
@@ -23,7 +24,7 @@ export class IncidentEditComponent implements OnInit {
 
   private incident: IncidentDto;
   private incidentId: string;
-  private getIncidentEndpoint: string = `${GlobalConstants.apiURL}/incidents`;
+  private getIncidentEndpoint: string = `${environment.apiUrl}/incidents`;
 
   public incidentForm: FormGroup = this.formBuilder.group({
     id: new FormControl({ value: '', disabled: true }),
