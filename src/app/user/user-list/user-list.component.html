@@ -1,9 +1,10 @@
 <div class="container">
-  <div class="row">
+  <!-- TODO: Add ability for admin users to create users -->
+  <!-- <div class="row">
     <div class="col-md-3 my-4">
       <a [routerLink]="['create']" mdbBtn color="primary" mdbWavesEffect size="sm">Create User</a>
     </div>
-  </div>
+  </div> -->
   <div class="row">
     <div class="col-md-3 my-4" *ngFor="let user of users">
       <mdb-card>
@@ -26,7 +27,11 @@
           </mdb-card-text>
 
           <a [routerLink]="['edit', user.id]" mdbBtn color="warning" mdbWavesEffect size="sm">Edit</a>
-          <a mdbBtn color="danger" mdbWavesEffect size="sm" (click)="deleteUser(user.id)">Delete</a>
+          <!-- TODO: Only admin users can delete users -->
+          <!-- TODO: Admins cannot be deleted -->
+          <!-- TODO: There must be at least one administrator -->
+          <!-- TODO: Hashed passwords/salts should not be sent to front end on edit/save -->
+          <!-- <a mdbBtn color="danger" mdbWavesEffect size="sm" (click)="deleteUser(user.id)">Delete</a> -->
 
         </mdb-card-body>
       </mdb-card>
