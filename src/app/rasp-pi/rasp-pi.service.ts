@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,9 @@ export class RaspPiService {
     private httpClient: HttpClient
   ) { }
 
-  private raspPiServerUrl = 'http://192.168.1.8:3001';
-
   async getApiStatus(): Promise<string> {
     return await this.httpClient
-      .get(`${this.raspPiServerUrl}/ping`, { responseType: 'text' })
+      .get(`${environment.raspPiUrl}/ping`, { responseType: 'text' })
       .toPromise()
       .then( pongString => {
         if (pongString === 'pong')
@@ -30,7 +29,7 @@ export class RaspPiService {
 
   async getCameraStatus(): Promise<string> {
     return await this.httpClient
-      .get(`${this.raspPiServerUrl}/camera-status`, { responseType: 'text' })
+      .get(`${environment.raspPiUrl}/camera-status`, { responseType: 'text' })
       .toPromise()
       .then( cameraStatus => {
         console.log('camera', cameraStatus)
