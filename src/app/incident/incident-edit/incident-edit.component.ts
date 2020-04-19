@@ -24,7 +24,7 @@ export class IncidentEditComponent implements OnInit {
 
   private incident: IncidentDto;
   private incidentId: string;
-  private getIncidentEndpoint: string = `${environment.apiUrl}/incidents`;
+  // private getIncidentEndpoint: string = `${environment.apiUrl}/incidents`;
 
   public incidentForm: FormGroup = this.formBuilder.group({
     id: new FormControl({ value: '', disabled: true }),
@@ -35,7 +35,9 @@ export class IncidentEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.incidentId = this.route.snapshot.paramMap.get('id');
-    this.getIncidentEndpoint = `${this.getIncidentEndpoint}/${this.incidentId}`
+    console.log('this.incidentId', this.incidentId);
+    // this.getIncidentEndpoint = `${this.getIncidentEndpoint}/${this.incidentId}`;
+    // console.log('this.getIncidentEndpoint', this.getIncidentEndpoint);
     this.setUp();
   }
 
