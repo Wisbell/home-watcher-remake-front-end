@@ -43,4 +43,38 @@ export class RaspPiService {
         return 'offline'
       });
   }
+
+  async startCamera(): Promise<string> {
+    return await this.httpClient
+      .get(`${environment.raspPiUrl}/security/start`, { responseType: 'text' })
+      .toPromise()
+      .then( cameraStartedBool => {
+        console.log('cameraStartedBool', cameraStartedBool)
+        if (cameraStartedBool)
+          return 'online';
+        else
+          return 'offline';
+      })
+      .catch( error => {
+        console.log('error', error);
+        return 'offline'
+      });
+  }
+
+  async stopCamera(): Promise<string> {
+    return await this.httpClient
+      .get(`${environment.raspPiUrl}/security/stop`, { responseType: 'text' })
+      .toPromise()
+      .then( cameraStoppedBool => {
+        console.log('cameraStoppedBool', cameraStoppedBool)
+        if (cameraStoppedBool)
+          return 'online';
+        else
+          return 'offline';
+      })
+      .catch( error => {
+        console.log('error', error);
+        return 'offline'
+      });
+  }
 }

@@ -14,3 +14,42 @@
   <span *ngIf="raspPiCameraStatus === 'online'" class="green-text">online</span>
   <span *ngIf="raspPiCameraStatus === 'offline'" class="red-text">offline</span>
 </div>
+
+<!-- Update status's button -->
+<div>
+  <button
+    mdbBtn
+    color="info"
+    block="true"
+    class="my-4"
+    type="button"
+    (click)="updateStatus()">
+    Update Status
+  </button>
+</div>
+
+<!-- Start camera -->
+<div *ngIf="raspPiCameraStatus === 'offline'">
+  <button
+    mdbBtn
+    color="success"
+    block="true"
+    class="my-4"
+    type="button"
+    (click)="startCamera()">
+    Start Camera
+  </button>
+</div>
+
+<!-- Stop camera -->
+<div *ngIf="raspPiCameraStatus === 'online'">
+  <button
+    mdbBtn
+    color="danger"
+    block="true"
+    class="my-4"
+    type="button"
+    (click)="stopCamera()">
+    Stop Camera
+  </button>
+</div>
