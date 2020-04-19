@@ -16,7 +16,7 @@
 </div>
 
 <!-- Update status's button -->
-<div>
+<div *ngIf="raspPiApiStatus && raspPiCameraStatus">
   <button
     mdbBtn
     color="info"
