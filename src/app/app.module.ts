@@ -24,7 +24,7 @@ import { SeederModule } from './seeder/seeder.module';
 
 // TODO: Figure out why this won't accept the global constants variable in app.global-constants file
 // const apiurl = 'localhost:3000';
-const apiurls = ['localhost:3000', 'https://home-watcher-api.herokuapp.com'];
+const apiurls = ['localhost:3000', 'home-watcher-api.herokuapp.com'];
 
 @NgModule({
   declarations: [
