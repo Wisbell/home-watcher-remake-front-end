@@ -23,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { SeederModule } from './seeder/seeder.module';
 
 // TODO: Figure out why this won't accept the global constants variable in app.global-constants file
-const apiurl = 'localhost:3000';
+// const apiurl = 'localhost:3000';
+const apiurls = ['localhost:3000', 'https://home-watcher-api.herokuapp.com'];
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ const apiurl = 'localhost:3000';
         tokenGetter: function tokenGetter() {
           return localStorage.getItem("accessToken");
         },
-        whitelistedDomains: ["example.com", apiurl],
+        // whitelistedDomains: ["example.com", apiurl],
+        whitelistedDomains: apiurls,
         blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     }),
