@@ -20,6 +20,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RaspPiModule } from './rasp-pi/rasp-pi.module';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ToastrModule } from 'ngx-toastr';
+import { SeederModule } from './seeder/seeder.module';
 
 // TODO: Figure out why this won't accept the global constants variable in app.global-constants file
 const apiurl = 'localhost:3000';
@@ -55,7 +56,8 @@ const apiurl = 'localhost:3000';
     UserModule,
     SecurityModule,
     IncidentModule,
-    RaspPiModule
+    RaspPiModule,
+    SeederModule
   ],
   providers: [],
   bootstrap: [AppComponent]

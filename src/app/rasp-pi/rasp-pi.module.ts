@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RaspPiServerStatusComponent } from './rasp-pi-server-status/rasp-pi-server-status.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 
@@ -9,7 +10,8 @@ import { RaspPiServerStatusComponent } from './rasp-pi-server-status/rasp-pi-ser
     RaspPiServerStatusComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MDBBootstrapModule.forRoot(),
   ],
   exports: [
     RaspPiServerStatusComponent

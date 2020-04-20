@@ -26,7 +26,7 @@ export class IncidentService {
 
   async get(id: string): Promise<IncidentDto> {
     const incident: IncidentDto = await this.httpClient
-      .get(`${environment.apiUrl}/${id}`)
+      .get(`${this.incidentApiUrl}/${id}`)
       .toPromise()
       .then( (incident) => incident as IncidentDto);
 

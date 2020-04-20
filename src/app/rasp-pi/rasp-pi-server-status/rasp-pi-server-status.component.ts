@@ -15,8 +15,24 @@ export class RaspPiServerStatusComponent implements OnInit {
   public raspPiApiStatus = null;
   public raspPiCameraStatus = null;
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.updateStatus();
+  }
+
+  async updateStatus(): Promise<void> {
     this.raspPiApiStatus = await this.raspPiService.getApiStatus();
     this.raspPiCameraStatus = await this.raspPiService.getCameraStatus();
+  }
+
+  async startCamera(): Promise<void> {
+    console.log('startCamera clicked!');
+    await this.raspPiService.startCamera();
+    this.updateStatus();
+  }
+
+  async stopCamera(): Promise<void> {
+    console.log('stopCamera clicked!');
+    await this.raspPiService.stopCamera();
+    this.updateStatus();
   }
 }

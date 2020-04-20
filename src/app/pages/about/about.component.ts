@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeederService } from '../../seeder/seeder.service';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private seederService: SeederService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  resetDatabase():void {
+    this.seederService.resetDatabase();
+  }
 }
