@@ -1,27 +1,21 @@
-# HomeWatcherRemakeFrontEnd
+# <p align="center">Home Watcher Remake - Front End</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+<p align="center"><a href="https://angular.io/" target="blank">Angular</a> application used to interact with <a href="https://github.com/Wisbell/home-watcher-nestjs-back-end#readme" target="blank">Home Watcher Api </a> and <a href="https://github.com/Wisbell/home-watcher-remake-rpi-server#readme" target="blank">Home Watcher Raspberry Pi Server</a></p>
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+$ npm install
+```
 
-## Code scaffolding
+## Running the app
+**In order to properly interface with the Raspberry Pi the environment (src/environments) variables must point to the host of the <a href="https://github.com/Wisbell/home-watcher-remake-rpi-server#readme" target="blank">Home Watcher Raspberry Pi Server</a></p>**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+# development/watch mode
+$ npm run start:dev
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# NOTE: Run 'npm run build' before running production
+# production mode
+$ npm run start
+```
